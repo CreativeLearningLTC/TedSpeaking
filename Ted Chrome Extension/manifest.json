@@ -1,0 +1,35 @@
+{
+  "name": "Speak English like Ted Talks",
+  "description": "Practice English Speaking using Ted Talks made easy",
+  "version": "1.0",
+
+  "permissions": [
+    "contextMenus",
+    "storage"
+  ],
+
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.ted.com/talks/*/transcript"
+      ],
+      "js": [
+        "lib/jquery-1.7.2.min.js",
+        "content_scripts.js"
+      ],
+      "css": [
+        "styles.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+
+  "manifest_version": 2
+}
+
