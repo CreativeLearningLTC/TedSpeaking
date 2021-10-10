@@ -46,8 +46,16 @@ const filter = {
 };
 
 function injectContentScript(details) {
-  chrome.tabs.executeScript({file: "lib/jquery-1.7.2.min.js"});
-  chrome.tabs.executeScript({file: "content_scripts.js"});
+
+  chrome.tabs.sendMessage(details.tabId, {text: "are_you_there_content_script?"}, function(msg) {
+    msg = msg || {};
+    if (msg.status != 'yes') {
+      chrome.tabs.insertCSS(details.tabId, {file: "styles.css"});
+      chrome.tabs.executeScript(details.tabId, {file: "lib/jquery-1.7.2.min.js"});
+      chrome.tabs.executeScript(details.tabId, {file: "content_scripts.js"});
+    }
+  });
+
 };
 
 chrome.webNavigation.onHistoryStateUpdated.addListener(injectContentScript, filter);
