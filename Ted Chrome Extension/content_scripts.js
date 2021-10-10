@@ -1,7 +1,7 @@
 
-const CSS_CLASS = "practice";
-const POSITION_ATTR = "position";
-const VIDEO_CONTAINER_SELECTOR = "#video-container";
+CSS_CLASS = "practice";
+POSITION_ATTR = "position";
+VIDEO_CONTAINER_SELECTOR = "#video-container";
 
 var storage = chrome.storage.local;
 

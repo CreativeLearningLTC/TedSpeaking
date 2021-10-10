@@ -21,6 +21,7 @@ storage.get({'mode': false}, function(data) {
 var menuId = chrome.contextMenus.create({
   "title": getMenuTitle(mode),
   "contexts": ["page"],
+  "documentUrlPatterns": ["https://www.ted.com/talks/*"],
   "onclick": practiceClickHandler
 });
 
@@ -35,3 +36,18 @@ function practiceClickHandler(info, tab) {
   storage.set({'mode': mode}, function() {
   });
 }
+
+// Inject content scripts when the talk link got updated.
+const filter = {
+  url: [
+    {hostEquals: "www.ted.com"},
+    {pathPrefix: "talks\\"}
+  ]
+};
+
+function injectContentScript(details) {
+  chrome.tabs.executeScript({file: "lib/jquery-1.7.2.min.js"});
+  chrome.tabs.executeScript({file: "content_scripts.js"});
+};
+
+chrome.webNavigation.onHistoryStateUpdated.addListener(injectContentScript, filter);
