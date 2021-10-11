@@ -13,27 +13,13 @@ function updateTedVideoPlayer(mode) {
   }
 }
 
-function initTedVideoPlayer() {
-  chrome.storage.local.get({'mode': false}, function(data) {
-    updateTedVideoPlayer(data.mode);
-  });  
-}
-
-// Listen to the update from context menu
-chrome.storage.onChanged.addListener(function(changes, namespace) {
-  for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
-    if (key == 'mode') {
-      updateTedVideoPlayer(newValue);
-    }
-  }
-});
-
-// Inform background script that this has been injected successfully.
+// Inform background/popup script that this has been injected successfully.
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
   if (msg.text === 'are_you_there_content_script?') {
     sendResponse({status: "yes"});
-    setTimeout(initTedVideoPlayer, 1000); 
+  } else if (msg.text === 'on') {
+    updateTedVideoPlayer(true);
+  } else if (msg.text === 'off') {
+    updateTedVideoPlayer(false);
   }
 });
-
-initTedVideoPlayer();

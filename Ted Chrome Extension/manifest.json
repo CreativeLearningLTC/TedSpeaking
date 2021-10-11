@@ -5,8 +5,6 @@
 
   "permissions": [
     "activeTab",
-    "contextMenus",
-    "storage",
     "tabs",
     "webNavigation",
     "*://*/*" 
@@ -18,27 +16,17 @@
     ]
   },
 
+  "page_action" : {
+    "default_icon": "icon16.png",
+    "default_title": "Practice English using Ted Talks",
+    "default_popup": "popup.html"
+  },
+
   "icons": {
     "16": "icon16.png",
     "48": "icon48.png",
     "128": "icon128.png"
   },
-
-  "content_scripts": [
-    {
-      "matches": [
-        "https://www.ted.com/talks/*/transcript"
-      ],
-      "js": [
-        "lib/jquery-1.7.2.min.js",
-        "content_scripts.js"
-      ],
-      "css": [
-        "styles.css"
-      ],
-      "run_at": "document_idle"
-    }
-  ],
 
   "manifest_version": 2
 }

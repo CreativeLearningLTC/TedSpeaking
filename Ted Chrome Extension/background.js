@@ -1,43 +1,17 @@
+// Show the page action
+function checkForTedTalkUrl(tabId, changeInfo, tab) {
+  // If the tabs url is a Ted Talk url
+  if (tab.url.indexOf('https://www.ted.com/talks/') == 0) {
+      chrome.pageAction.show(tabId);
+  }
+};
+
+// Listen for any changes to the URL of any tab.
+chrome.tabs.onUpdated.addListener(checkForTedTalkUrl);
 
 /**
- * We use mode to control if this is in practice or not.
- * The page level context menu reflects the state.
- * The value is stored in storage for content script to access.
+ * Inject content scripts when the talk link got updated.
  */
-var modeOnTitle = "Turn on practice mode";
-var modeOffTitle = "Turn off practice mode";
-
-var storage = chrome.storage.local;
-var mode;
-
-function getMenuTitle(mode) {
-  return mode ? modeOffTitle : modeOnTitle;
-}
-
-storage.get({'mode': false}, function(data) {
-  mode = data.mode;
-});
-
-var menuId = chrome.contextMenus.create({
-  "title": getMenuTitle(mode),
-  "contexts": ["page"],
-  "documentUrlPatterns": ["https://www.ted.com/talks/*"],
-  "onclick": practiceClickHandler
-});
-
-function practiceClickHandler(info, tab) {
-  mode = !mode;
-
-  chrome.contextMenus.update(menuId, {
-    "title": getMenuTitle(mode)
-  });
-
-  // update storage
-  storage.set({'mode': mode}, function() {
-  });
-}
-
-// Inject content scripts when the talk link got updated.
 const filter = {
   url: [
     {hostEquals: "www.ted.com"},
