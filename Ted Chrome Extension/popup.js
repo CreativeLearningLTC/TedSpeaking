@@ -10,12 +10,12 @@ function clickHandler(e) {
           chrome.tabs.executeScript(activeTabId, {file: "content_scripts.js"});
         }
     });
-    console.warn(e);
     if (e.srcElement.id === "turnoff") {
         chrome.tabs.sendMessage(activeTabId, {text: "off"});
     } else {
         chrome.tabs.sendMessage(activeTabId, {text: "on"});
     }
+    window.close();
   });
 }
 

@@ -8,12 +8,36 @@
           vertical-align: middle;
           justify-content:center;
         }
-      </style>
+        p {
+          text-align: center;
+        }
+        button {
+            background-color: #008CBA;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            margin-left: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 10px;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+        }
+            </style>
 </head>
 <body>
-    <p>Click below buttons to turn on or off practice mode: </p>
-    <button id="turnon">Turn On</button>
-    <button id="turnoff">Turn Off</button>
+    <p>Click below button to turn on or off practice</p>
+    <div class="container">
+        <button id="turnon">Turn On</button>
+        <button id="turnoff">Turn Off</button>
+    </div>
     <script src='popup.js'></script>
   </body>
 </html>
