@@ -15,7 +15,7 @@ https://chrome.google.com/webstore/detail/speak-english-like-ted-ta/icepjpjnmelm
 
 ## How to use it
 
-- Right click to click "Turn on practice mode"
+- Click extension icon to click "Turn on" button
 - Click any text to listen to the speaker, and repeat to prctice
 - Click the Ted Video player to stop
 - Click the same text to repeat
