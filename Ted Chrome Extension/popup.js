@@ -9,13 +9,13 @@ function clickHandler(e) {
           chrome.tabs.executeScript(activeTabId, {file: "lib/jquery-1.7.2.min.js"});
           chrome.tabs.executeScript(activeTabId, {file: "content_scripts.js"});
         }
+        if (e.srcElement.id === "turnoff") {
+            chrome.tabs.sendMessage(activeTabId, {text: "off"});
+        } else {
+            chrome.tabs.sendMessage(activeTabId, {text: "on"});
+        }
+        window.close();
     });
-    if (e.srcElement.id === "turnoff") {
-        chrome.tabs.sendMessage(activeTabId, {text: "off"});
-    } else {
-        chrome.tabs.sendMessage(activeTabId, {text: "on"});
-    }
-    window.close();
   });
 }
 
