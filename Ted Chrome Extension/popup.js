@@ -1,22 +1,41 @@
-function clickHandler(e) {
-  chrome.tabs.query({ active: true, currentWindow: true }, function(tabs){
-    var activeTab = tabs[0];
-    var activeTabId = activeTab.id; 
-    chrome.tabs.sendMessage(activeTabId, {text: "are_you_there_content_script?"}, function(msg) {
+async function getCurrentTab() {
+    let queryOptions = { active: true, currentWindow: true };
+    let [tab] = await chrome.tabs.query(queryOptions);
+    return tab;
+}
+
+async function clickHandler(e) {
+    let activeTab = await getCurrentTab();
+    let activeTabId = activeTab.id;
+
+    chrome.tabs.sendMessage(activeTabId, {text: "are_you_there_content_script?"}, async function(msg) {
         msg = msg || {};
-        if (msg.status != 'yes') {
-          chrome.tabs.insertCSS(activeTabId, {file: "styles.css"});
-          chrome.tabs.executeScript(activeTabId, {file: "lib/jquery-1.7.2.min.js"});
-          chrome.tabs.executeScript(activeTabId, {file: "content_scripts.js"});
-        }
+        let onOff = 'on';
         if (e.srcElement.id === "turnoff") {
-            chrome.tabs.sendMessage(activeTabId, {text: "off"});
-        } else {
-            chrome.tabs.sendMessage(activeTabId, {text: "on"});
+            onOff = 'off';
         }
+
+        if (msg.status != 'yes') {
+          await chrome.scripting.insertCSS(
+            {
+                target: {tabId: activeTabId},
+                files: [
+                    'styles.css'
+                ],
+            });
+          await chrome.scripting.executeScript(
+            {
+                target: {tabId: activeTabId},
+                files: [
+                    'styles.css',
+                    'lib/jquery-1.7.2.min.js',
+                    'content_scripts.js'
+                ],
+            });
+        }
+        chrome.tabs.sendMessage(activeTabId, {text: onOff});
         window.close();
     });
-  });
 }
 
 let turnonBtn = document.getElementById("turnon");

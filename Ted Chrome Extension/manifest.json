@@ -1,33 +1,28 @@
 {
   "name": "Speak English like Ted Talks",
   "description": "Practice English Speaking using Ted Talks made easy",
-  "version": "1.1",
+  "version": "2.0",
 
   "permissions": [
     "activeTab",
-    "tabs",
-    "webNavigation",
-    "*://*/*" 
+    "declarativeContent",
+    "scripting"
   ],
 
   "background": {
-    "scripts": [
-      "background.js"
-    ]
+    "service_worker": "background.js"
   },
 
-  "page_action" : {
-    "default_icon": "icon16.png",
+  "action" : {
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    },
     "default_title": "Practice English using Ted Talks",
     "default_popup": "popup.html"
   },
 
-  "icons": {
-    "16": "icon16.png",
-    "48": "icon48.png",
-    "128": "icon128.png"
-  },
-
-  "manifest_version": 2
+  "manifest_version": 3
 }
 
