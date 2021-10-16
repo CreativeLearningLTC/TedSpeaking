@@ -3,9 +3,9 @@ Chrome Extension to turn Ted Talks into an easy English practice site
 
 ## What Problem We are solving
 
-As a non-native English speaker, Ted Talks is a great way to pratice English. You can click any sentence to play it. 
+As a non-native English speaker, Ted Talks is a great way to practice English. You can click any sentence to play it. 
 
-However, you can not easily stop the play and repeat the sentence. To do that, you will have to sccroll all the way to the top of the page and click the Ted Player. This back and forth is very inconvenient. 
+However, you can not easily stop the play and repeat the sentence. To do that, you will have to scroll all the way to the top of the page and click the Ted Player. This back and forth is very inconvenient. 
 
 This Chrome Extension solved that problem by making the Ted Player sticky during page scroll, allowing you to play and pause nicely.
 
@@ -15,8 +15,8 @@ https://chrome.google.com/webstore/detail/speak-english-like-ted-ta/icepjpjnmelm
 
 ## How to use it
 
-- Click extension icon to click "Turn on" button
-- Click any text to listen to the speaker, and repeat to prctice
+- Click extension icon and click "Turn on" button of the popup
+- Click any text to listen to the speaker, and repeat to practice
 - Click the Ted Video player to stop
 - Click the same text to repeat
 
